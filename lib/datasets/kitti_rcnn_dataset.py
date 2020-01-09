@@ -245,7 +245,7 @@ class KittiRCNNDataset(KittiDataset):
 
     def get_rpn_sample(self, index):
         sample_id = int(self.sample_id_list[index])
-        if sample_id < 10000:
+        if sample_id < 100000:
             calib = self.get_calib(sample_id)
             # img = self.get_image(sample_id)
             img_shape = self.get_image_shape(sample_id)
