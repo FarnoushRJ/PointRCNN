@@ -10,7 +10,7 @@ from lib.config import cfg
 
 
 class KittiRCNNDataset(KittiDataset):
-    def __init__(self, root_dir, npoints=16384, split='train', classes='Car', mode='TRAIN', random_select=True,
+    def __init__(self, root_dir, npoints=128, split='train', classes='Car', mode='TRAIN', random_select=True,
                  logger=None, rcnn_training_roi_dir=None, rcnn_training_feature_dir=None, rcnn_eval_roi_dir=None,
                  rcnn_eval_feature_dir=None, gt_database_dir=None):
         super().__init__(root_dir=root_dir, split=split)
@@ -295,7 +295,10 @@ class KittiRCNNDataset(KittiDataset):
                 np.random.shuffle(choice)
             else:
                 choice = np.arange(0, len(pts_rect), dtype=np.int32)
-                if self.npoints > len(pts_rect):
+                if self.npoints > len(pts_rect)*2:
+                    extra_choice = np.random.choice(choice, self.npoints - len(pts_rect), replace=True)
+                    choice = np.concatenate((choice, extra_choice), axis=0)
+                else:
                     extra_choice = np.random.choice(choice, self.npoints - len(pts_rect), replace=False)
                     choice = np.concatenate((choice, extra_choice), axis=0)
                 np.random.shuffle(choice)
