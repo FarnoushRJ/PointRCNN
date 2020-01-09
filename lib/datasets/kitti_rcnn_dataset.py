@@ -115,7 +115,7 @@ class KittiRCNNDataset(KittiDataset):
                                                                  len(self.image_idx_list)))
 
     def get_label(self, idx):
-        if idx < 10000:
+        if idx < 100000:
             label_file = os.path.join(self.label_dir, '%06d.txt' % idx)
         else:
             label_file = os.path.join(self.aug_label_dir, '%06d.txt' % idx)
