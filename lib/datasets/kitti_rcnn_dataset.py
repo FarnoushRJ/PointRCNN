@@ -15,7 +15,7 @@ class KittiRCNNDataset(KittiDataset):
                  rcnn_eval_feature_dir=None, gt_database_dir=None):
         super().__init__(root_dir=root_dir, split=split)
         if classes == 'Car':
-            self.classes = ('background', 'car')
+            self.classes = ('Background', 'Car')
             aug_scene_root_dir = os.path.join(root_dir, 'KITTI', 'aug_scene')
         elif classes == 'People':
             self.classes = ('Background', 'Pedestrian', 'Cyclist')
@@ -165,7 +165,7 @@ class KittiRCNNDataset(KittiDataset):
 
         valid_obj_list = []
         for obj in obj_list:
-            if obj.cls_type not in type_whitelist:  # rm Van, 20180928
+            if obj.cls_type.capitalize() not in type_whitelist:  # rm Van, 20180928
                 continue
             if self.mode == 'TRAIN' and cfg.PC_REDUCE_BY_RANGE and (self.check_pc_range(obj.pos) is False):
                 continue
