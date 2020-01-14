@@ -39,7 +39,7 @@ class GTDatabaseGenerator(KittiDataset):
     def filtrate_objects(self, obj_list):
         valid_obj_list = []
         for obj in obj_list:
-            if obj.cls_type not in self.classes:
+            if obj.cls_type.capitalize() not in self.classes:
                 continue
             if obj.level_str not in ['Easy', 'Moderate', 'Hard']:
                 continue
