@@ -285,7 +285,7 @@ class KittiRCNNDataset(KittiDataset):
         if self.mode == 'TRAIN' or self.random_select:
             
             with open('npoints.txt', 'a') as f:
-                f.write(str(pts_rect) + '\n')
+                f.write(str(len(pts_rect)) + '\n')
             
             if self.npoints < len(pts_rect):
                 pts_depth = pts_rect[:, 2]
