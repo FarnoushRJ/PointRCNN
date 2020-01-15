@@ -265,6 +265,10 @@ class KittiRCNNDataset(KittiDataset):
             pts_rect, pts_intensity = aug_pts[:, 0:3], aug_pts[:, 3]
 
         pts_img, pts_rect_depth = calib.rect_to_img(pts_rect)
+                    
+        with open('npoints.txt', 'a') as f:
+            f.write(str(len(pts_rect)) + '\n')
+            
         pts_valid_flag = self.get_valid_flag(pts_rect, pts_img, pts_rect_depth, img_shape)
 
         pts_rect = pts_rect[pts_valid_flag][:, 0:3]
