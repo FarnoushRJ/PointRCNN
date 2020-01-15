@@ -280,9 +280,13 @@ class KittiRCNNDataset(KittiDataset):
                 # augment one scene
                 gt_aug_flag, pts_rect, pts_intensity, extra_gt_boxes3d, extra_gt_obj_list = \
                     self.apply_gt_aug_to_one_scene(sample_id, pts_rect, pts_intensity, all_gt_boxes3d)
-
+            
         # generate inputs
         if self.mode == 'TRAIN' or self.random_select:
+            
+        with open('npoints.txt', 'a') as f:
+            f.write(str(pts_rect) + '\n')
+            
             if self.npoints < len(pts_rect):
                 pts_depth = pts_rect[:, 2]
                 pts_near_flag = pts_depth < 40.0
@@ -295,8 +299,11 @@ class KittiRCNNDataset(KittiDataset):
                 np.random.shuffle(choice)
             else:
                 choice = np.arange(0, len(pts_rect), dtype=np.int32)
-                if self.npoints > len(pts_rect):
+                if self.npoints > len(pts_rect)*2:
                     extra_choice = np.random.choice(choice, self.npoints - len(pts_rect), replace=True)
+                    choice = np.concatenate((choice, extra_choice), axis=0)
+                else:
+                    extra_choice = np.random.choice(choice, self.npoints - len(pts_rect), replace=False)
                     choice = np.concatenate((choice, extra_choice), axis=0)
                 np.random.shuffle(choice)
 
