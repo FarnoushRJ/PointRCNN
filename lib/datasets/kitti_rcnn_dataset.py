@@ -266,8 +266,8 @@ class KittiRCNNDataset(KittiDataset):
 
         pts_img, pts_rect_depth = calib.rect_to_img(pts_rect)
                     
-        """with open('npoints.txt', 'a') as f:
-            f.write(str(len(pts_rect)) + '\n')"""
+        with open('npoints.txt', 'a') as f:
+            f.write(str(len(pts_rect)) + '\n')
             
         pts_valid_flag = self.get_valid_flag(pts_rect, pts_img, pts_rect_depth, img_shape)
 
@@ -288,8 +288,8 @@ class KittiRCNNDataset(KittiDataset):
         # generate inputs
         if self.mode == 'TRAIN' or self.random_select:
             
-            '''with open('npoints.txt', 'a') as f:
-                f.write(str(len(pts_rect)) + '\n')'''
+            with open('npoints_filtered.txt', 'a') as f:
+                f.write(str(len(pts_rect)) + '\n')
             
             if self.npoints < len(pts_rect):
                 pts_depth = pts_rect[:, 2]
