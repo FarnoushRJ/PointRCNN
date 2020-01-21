@@ -21,7 +21,7 @@ CLS_MEAN_SIZE: [[1.52563191462, 1.62856739989, 3.88311640418]]
 
 # 1. config of rpn network
 RPN:
-    ENABLED: True
+    ENABLED: False
     FIXED: False
 
     # config of input
