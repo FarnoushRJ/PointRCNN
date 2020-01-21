@@ -21,7 +21,7 @@ CLS_MEAN_SIZE: [[1.52563191462, 1.62856739989, 3.88311640418]]
 
 # 1. config of rpn network
 RPN:
-    ENABLED: False
+    ENABLED: True
     FIXED: False
 
     # config of input
@@ -97,7 +97,7 @@ RCNN:
     BACKBONE: pointnet  # pointnet
     XYZ_UP_LAYER: [128, 128]
 
-    NUM_POINTS: 256
+    NUM_POINTS: 16
     SA_CONFIG:
         NPOINTS: [128, 32, -1]
         RADIUS: [0.2, 0.4, 100]
